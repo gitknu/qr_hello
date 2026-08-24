@@ -7,30 +7,28 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --color-red: #b80000;
-      --color-dark-blue: #090e1a;
-      --color-black: #000000;
       --color-white: #ffffff;
-      --color-navy-light: #131b2e;
-      --color-navy-dark: #04070d;
+      --color-black: #000000;
+      --color-pink: #ff8da1;
+      --color-soft-blue: #e8f1f5;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
 
     body {
-      background-color: var(--color-black);
-      color: var(--color-white);
+      background-color: #f3f5f8;
+      color: var(--color-black);
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
@@ -44,14 +42,15 @@
       max-width: 420px;
       height: 100vh;
       height: 100dvh;
-      background-color: var(--color-dark-blue);
+      background-color: var(--color-white);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: clamp(20px, 4vh, 36px) 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
     }
 
     .game-screen {
@@ -76,12 +75,10 @@
     }
 
     .header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.3rem, 5.5vw, 1.8rem);
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: 0.5px;
-      color: var(--color-white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 6vw, 1.9rem);
+      font-weight: 600;
+      color: var(--color-black);
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -90,15 +87,15 @@
     }
 
     .header-icon {
-      color: var(--color-red);
+      color: var(--color-pink);
       width: clamp(18px, 4.5vw, 24px);
       height: clamp(18px, 4.5vw, 24px);
     }
 
     .header p {
       font-size: clamp(0.7rem, 2.8vw, 0.8rem);
-      color: rgba(255, 255, 255, 0.4);
-      font-weight: 500;
+      color: rgba(0, 0, 0, 0.4);
+      font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
@@ -128,23 +125,23 @@
       height: 100%;
       min-width: 0;
       min-height: 0;
-      background-color: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background-color: var(--color-soft-blue);
+      border: 1.5px solid transparent;
       border-radius: 8px;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
       box-sizing: border-box;
     }
 
     .char-box.active {
-      border-color: rgba(255, 255, 255, 0.5);
-      background-color: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      border-color: var(--color-black);
+      background-color: var(--color-white);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.04);
     }
 
     .char-box.filled {
-      border-color: var(--color-red);
-      background-color: rgba(184, 0, 0, 0.05);
+      border-color: var(--color-pink);
+      background-color: rgba(255, 141, 161, 0.06);
     }
 
     .char-text {
@@ -154,19 +151,19 @@
       transform: translate(-50%, -50%);
       font-size: clamp(1.2rem, 5vw, 1.8rem);
       font-weight: 600;
-      color: var(--color-white);
+      color: var(--color-black);
       line-height: 1;
       pointer-events: none;
     }
 
     .hint-btn {
       background-color: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid var(--color-pink);
+      color: var(--color-pink);
       padding: clamp(12px, 2vh, 16px) clamp(32px, 8vw, 48px);
       border-radius: 30px;
       font-size: clamp(0.75rem, 3.2vw, 0.85rem);
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
@@ -182,9 +179,7 @@
     }
 
     .hint-btn:active {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 141, 161, 0.08);
       transform: scale(0.97);
     }
 
@@ -214,28 +209,28 @@
     .key-btn {
       flex: 1;
       height: clamp(44px, 6.5vh, 54px);
-      background-color: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: var(--color-soft-blue);
+      border: 1px solid transparent;
       border-radius: 8px;
-      color: var(--color-white);
+      color: var(--color-black);
       font-size: clamp(0.95rem, 4vw, 1.2rem);
-      font-weight: 500;
+      font-weight: 600;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      transition: transform 0.08s ease, background-color 0.08s ease, border-color 0.08s ease;
+      transition: transform 0.08s ease, background-color 0.08s ease;
     }
 
     .key-btn:active {
       transform: scale(0.95);
-      background-color: var(--color-red);
-      border-color: var(--color-red);
+      background-color: var(--color-pink);
+      color: var(--color-white);
     }
 
     @media (hover: hover) {
       .key-btn:hover {
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: rgba(0, 0, 0, 0.04);
       }
     }
 
@@ -248,34 +243,34 @@
 
     .clear-key {
       flex: 1;
-      background-color: rgba(255, 255, 255, 0.01);
-      color: rgba(255, 255, 255, 0.6);
+      background-color: var(--color-white);
+      color: var(--color-black);
       font-size: clamp(0.7rem, 3.2vw, 0.85rem);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
       white-space: nowrap;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .clear-key:active {
-      background-color: rgba(255, 74, 74, 0.08);
-      border-color: rgba(255, 74, 74, 0.2);
+      background-color: rgba(0, 0, 0, 0.05);
     }
 
     .enter-key {
       flex: 1.5;
-      background-color: var(--color-red);
+      background-color: var(--color-pink);
       font-size: clamp(0.7rem, 3.2vw, 0.85rem);
       font-weight: 700;
       letter-spacing: 1.5px;
       white-space: nowrap;
       text-transform: uppercase;
-      border: 1px solid var(--color-red);
+      border: 1.5px solid var(--color-pink);
+      color: var(--color-white);
     }
 
     .enter-key:active {
-      background-color: #920000;
-      border-color: #920000;
+      background-color: #e57589;
+      border-color: #e57589;
     }
 
     .success-screen {
@@ -284,7 +279,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: var(--color-navy-dark);
+      background-color: var(--color-white);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -304,19 +299,17 @@
     }
 
     .success-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 6.5vw, 2rem);
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: 0.5px;
-      color: var(--color-white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 7vw, 2.2rem);
+      font-weight: 600;
+      color: var(--color-black);
       margin-top: clamp(24px, 5vh, 32px);
       text-align: center;
     }
 
     .success-subtitle {
       font-size: clamp(0.85rem, 3.8vw, 1.05rem);
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(0, 0, 0, 0.6);
       margin-top: 12px;
       text-align: center;
       line-height: 1.6;
@@ -336,7 +329,7 @@
       position: absolute;
       width: 80%;
       height: 80%;
-      background: radial-gradient(circle, rgba(184, 0, 0, 0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 141, 161, 0.25) 0%, transparent 70%);
       border-radius: 50%;
       animation: pulse-glow 3s ease-in-out infinite;
     }
@@ -347,7 +340,7 @@
       max-width: 110px;
       max-height: 110px;
       z-index: 2;
-      filter: drop-shadow(0 0 8px rgba(184, 0, 0, 0.4));
+      filter: drop-shadow(0 0 8px rgba(255, 141, 161, 0.25));
     }
 
     @keyframes pulse-glow {
@@ -386,7 +379,7 @@
 
     .error-box {
       border-color: var(--color-red) !important;
-      box-shadow: 0 0 12px rgba(184, 0, 0, 0.3) !important;
+      box-shadow: 0 0 12px rgba(184, 0, 0, 0.2) !important;
     }
 
     @keyframes shake-action {
@@ -398,8 +391,8 @@
     .reset-btn {
       margin-top: clamp(24px, 5vh, 40px);
       background-color: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid var(--color-pink);
+      color: var(--color-pink);
       padding: 10px 24px;
       border-radius: 30px;
       font-size: 0.8rem;
@@ -411,9 +404,8 @@
     }
 
     .reset-btn:active {
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border-color: #ffffff;
+      background-color: rgba(255, 141, 161, 0.08);
+      color: var(--color-pink);
     }
 
     .hint-overlay {
@@ -422,8 +414,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(6px);
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -440,15 +432,15 @@
     }
 
     .hint-content {
-      background-color: var(--color-navy-dark);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background-color: var(--color-white);
+      border: 1.5px solid var(--color-pink);
       border-radius: 24px;
       padding: clamp(36px, 6vh, 52px) clamp(24px, 5vw, 40px);
       width: 100%;
       max-width: 340px;
       position: relative;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
       transform: translateY(20px);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -458,11 +450,11 @@
     }
 
     .hint-content p {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 4.8vw, 1.4rem);
       line-height: 1.6;
-      color: var(--color-white);
-      font-weight: 500;
+      color: var(--color-black);
+      font-weight: 600;
       font-style: italic;
     }
   </style>
@@ -554,18 +546,18 @@
           </defs>
           
           <g clip-path="url(#bowl-clip)">
-            <rect class="wine-liquid" x="2" y="5" width="20" height="11" fill="#b80000" stroke="none" />
+            <rect class="wine-liquid" x="2" y="5" width="20" height="11" fill="#ff8da1" stroke="none" />
             
             <g clip-path="url(#liquid-clip)">
-              <circle class="bubble bubble-1" cx="10" cy="13" r="0.4" fill="rgba(255,255,255,0.6)" stroke="none" />
-              <circle class="bubble bubble-2" cx="14" cy="12" r="0.3" fill="rgba(255,255,255,0.6)" stroke="none" />
-              <circle class="bubble bubble-3" cx="11" cy="10" r="0.5" fill="rgba(255,255,255,0.6)" stroke="none" />
+              <circle class="bubble bubble-1" cx="10" cy="13" r="0.4" fill="rgba(255,255,255,0.8)" stroke="none" />
+              <circle class="bubble bubble-2" cx="14" cy="12" r="0.3" fill="rgba(255,255,255,0.8)" stroke="none" />
+              <circle class="bubble bubble-3" cx="11" cy="10" r="0.5" fill="rgba(255,255,255,0.8)" stroke="none" />
             </g>
           </g>
           
-          <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" stroke="#ffffff" />
-          <path d="M12 15v7" stroke="#ffffff" />
-          <path d="M8 22h8" stroke="#ffffff" />
+          <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" stroke="#000000" />
+          <path d="M12 15v7" stroke="#000000" />
+          <path d="M8 22h8" stroke="#000000" />
         </svg>
       </div>
       <h2 class="success-title">Є ШАМПУСІК))</h2>
