@@ -597,18 +597,41 @@
     const hintClose = document.getElementById('hint-close');
 
     function _0x5c2(c) {
-      if (c === 'I' || c === 'i' || c === 'і' || c === 'І') {
+      if (!c) return '';
+      let u = c.toString().toUpperCase();
+      
+      const homoglyphs = {
+        'A': 'А',
+        'B': 'В',
+        'C': 'С',
+        'E': 'Е',
+        'H': 'Н',
+        'I': 'І',
+        'K': 'К',
+        'M': 'М',
+        'O': 'О',
+        'P': 'Р',
+        'T': 'Т',
+        'X': 'Х',
+        'Y': 'У'
+      };
+      
+      if (u === 'І' || u === 'I' || u === 'і' || u === 'i') {
         return 'І';
       }
-      return c.toUpperCase();
+      
+      return homoglyphs[u] || u;
     }
 
     function _0x3b1a(s) {
-      let r = "";
-      for (let i = 0; i < s.length; i++) {
-        r += (s.charCodeAt(i) ^ 42).toString(16);
+      if (s.length !== 6) return false;
+      const target = [1042, 1045, 1056, 1030, 1058, 1030];
+      for (let i = 0; i < 6; i++) {
+        if (s.charCodeAt(i) !== target[i]) {
+          return false;
+        }
       }
-      return r;
+      return true;
     }
 
     function updateDisplay() {
@@ -650,7 +673,7 @@
     function submitAttempt() {
       const codeString = enteredCode.join('');
       
-      if (_0x3b1a(codeString) === "3f83ff40a3ec4083ec") {
+      if (_0x3b1a(codeString)) {
         successScreen.classList.add('show');
         gameScreen.classList.add('hide');
       } else {
