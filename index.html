@@ -7,23 +7,23 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --color-red: #b80000;
-      --color-dark-blue: #0a1128;
+      --color-dark-blue: #090e1a;
       --color-black: #000000;
       --color-white: #ffffff;
-      --color-navy-light: #121c3a;
-      --color-navy-dark: #070d1e;
+      --color-navy-light: #131b2e;
+      --color-navy-dark: #04070d;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Inter', sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
@@ -48,10 +48,10 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(12px, 3vh, 28px) 16px;
+      padding: clamp(20px, 4vh, 36px) 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
     }
 
     .game-screen {
@@ -76,16 +76,17 @@
     }
 
     .header h1 {
-      font-size: clamp(1.2rem, 5vw, 1.6rem);
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.5px;
       color: var(--color-white);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .header-icon {
@@ -95,9 +96,11 @@
     }
 
     .header p {
-      font-size: clamp(0.75rem, 3vw, 0.85rem);
-      color: #8c9cb8;
+      font-size: clamp(0.7rem, 2.8vw, 0.8rem);
+      color: rgba(255, 255, 255, 0.4);
       font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .code-wrapper {
@@ -105,7 +108,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin: 10px 0;
+      margin: 15px 0;
       flex-grow: 1;
     }
 
@@ -125,22 +128,23 @@
       height: 100%;
       min-width: 0;
       min-height: 0;
-      background-color: rgba(0, 0, 0, 0.4);
-      border: 2px solid var(--color-navy-light);
-      border-radius: 12px;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
       box-sizing: border-box;
     }
 
     .char-box.active {
       border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
     }
 
     .char-box.filled {
       border-color: var(--color-red);
+      background-color: rgba(184, 0, 0, 0.05);
     }
 
     .char-text {
@@ -149,45 +153,45 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: clamp(1.2rem, 5vw, 1.8rem);
-      font-weight: 700;
+      font-weight: 600;
       color: var(--color-white);
       line-height: 1;
       pointer-events: none;
     }
 
     .hint-btn {
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1.5px solid rgba(255, 255, 255, 0.25);
-      color: rgba(255, 255, 255, 0.9);
-      padding: clamp(10px, 1.8vh, 14px) clamp(24px, 6vw, 36px);
-      border-radius: 25px;
-      font-size: clamp(0.8rem, 3.5vw, 0.95rem);
-      font-weight: 700;
-      letter-spacing: 1px;
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.7);
+      padding: clamp(12px, 2vh, 16px) clamp(32px, 8vw, 48px);
+      border-radius: 30px;
+      font-size: clamp(0.75rem, 3.2vw, 0.85rem);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s ease;
-      margin-top: clamp(14px, 3vh, 26px);
+      margin-top: clamp(20px, 4vh, 32px);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       align-self: center;
       width: auto;
       max-width: 90%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .hint-btn:active {
-      background-color: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.05);
       color: #ffffff;
-      transform: scale(0.98);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(0.97);
     }
 
     .inline-icon {
-      width: 1.2em;
-      height: 1.2em;
-      stroke-width: 2;
+      width: 1.25em;
+      height: 1.25em;
+      stroke-width: 1.8;
       display: inline-block;
       vertical-align: middle;
       flex-shrink: 0;
@@ -197,40 +201,41 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: clamp(6px, 1.2vh, 8px);
+      gap: clamp(8px, 1.5vh, 10px);
       flex-shrink: 0;
     }
 
     .keyboard-row {
       display: flex;
-      gap: clamp(6px, 1.2vh, 8px);
+      gap: clamp(8px, 1.5vh, 10px);
       width: 100%;
     }
 
     .key-btn {
       flex: 1;
-      height: clamp(42px, 6.5vh, 54px);
-      background-color: var(--color-navy-light);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 10px;
+      height: clamp(44px, 6.5vh, 54px);
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
       color: var(--color-white);
-      font-size: clamp(0.9rem, 4vw, 1.2rem);
-      font-weight: 600;
+      font-size: clamp(0.95rem, 4vw, 1.2rem);
+      font-weight: 500;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      transition: transform 0.08s ease, background-color 0.08s ease;
+      transition: transform 0.08s ease, background-color 0.08s ease, border-color 0.08s ease;
     }
 
     .key-btn:active {
       transform: scale(0.95);
       background-color: var(--color-red);
+      border-color: var(--color-red);
     }
 
     @media (hover: hover) {
       .key-btn:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.08);
       }
     }
 
@@ -238,36 +243,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .clear-key {
       flex: 1;
-      background-color: var(--color-black);
-      color: #ff4a4a;
-      font-size: clamp(0.7rem, 3.2vw, 0.9rem);
-      border: 1px solid rgba(255, 74, 74, 0.15);
+      background-color: rgba(255, 255, 255, 0.01);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: clamp(0.7rem, 3.2vw, 0.85rem);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       white-space: nowrap;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     .clear-key:active {
-      background-color: #210909;
+      background-color: rgba(255, 74, 74, 0.08);
+      border-color: rgba(255, 74, 74, 0.2);
     }
 
     .enter-key {
       flex: 1.5;
       background-color: var(--color-red);
-      font-size: clamp(0.7rem, 3.2vw, 0.9rem);
+      font-size: clamp(0.7rem, 3.2vw, 0.85rem);
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       white-space: nowrap;
       text-transform: uppercase;
+      border: 1px solid var(--color-red);
     }
 
     .enter-key:active {
-      background-color: #8c0000;
+      background-color: #920000;
+      border-color: #920000;
     }
 
     .success-screen {
@@ -296,22 +304,23 @@
     }
 
     .success-title {
-      font-size: clamp(1.4rem, 6vw, 1.8rem);
-      font-weight: 800;
-      letter-spacing: 2px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 6.5vw, 2rem);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.5px;
       color: var(--color-white);
-      margin-top: clamp(20px, 4vh, 28px);
+      margin-top: clamp(24px, 5vh, 32px);
       text-align: center;
-      text-transform: uppercase;
     }
 
     .success-subtitle {
       font-size: clamp(0.85rem, 3.8vw, 1.05rem);
-      color: #8c9cb8;
-      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 12px;
       text-align: center;
-      line-height: 1.5;
-      max-width: 90%;
+      line-height: 1.6;
+      max-width: 85%;
     }
 
     .glass-container {
@@ -377,7 +386,7 @@
 
     .error-box {
       border-color: var(--color-red) !important;
-      box-shadow: 0 0 10px rgba(184, 0, 0, 0.4) !important;
+      box-shadow: 0 0 12px rgba(184, 0, 0, 0.3) !important;
     }
 
     @keyframes shake-action {
@@ -413,16 +422,16 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.35s ease;
       z-index: 100;
-      padding: 20px;
+      padding: 24px;
     }
 
     .hint-overlay.show {
@@ -432,16 +441,16 @@
 
     .hint-content {
       background-color: var(--color-navy-dark);
-      border: 1px solid var(--color-red);
-      border-radius: 16px;
-      padding: 28px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: clamp(36px, 6vh, 52px) clamp(24px, 5vw, 40px);
       width: 100%;
-      max-width: 320px;
+      max-width: 340px;
       position: relative;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(184, 0, 0, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
       transform: translateY(20px);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hint-overlay.show .hint-content {
@@ -449,27 +458,12 @@
     }
 
     .hint-content p {
-      font-size: 0.9rem;
-      line-height: 1.5;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+      line-height: 1.6;
       color: var(--color-white);
       font-weight: 500;
-    }
-
-    .hint-close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      background: none;
-      border: none;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 4px;
-      line-height: 1;
-    }
-
-    .hint-close:hover {
-      color: var(--color-white);
+      font-style: italic;
     }
   </style>
 </head>
@@ -554,13 +548,19 @@
             <clipPath id="bowl-clip">
               <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" />
             </clipPath>
+            <clipPath id="liquid-clip">
+              <rect class="wine-liquid" x="2" y="5" width="20" height="11" />
+            </clipPath>
           </defs>
           
           <g clip-path="url(#bowl-clip)">
             <rect class="wine-liquid" x="2" y="5" width="20" height="11" fill="#b80000" stroke="none" />
-            <circle class="bubble bubble-1" cx="10" cy="13" r="0.4" fill="rgba(255,255,255,0.6)" stroke="none" />
-            <circle class="bubble bubble-2" cx="14" cy="12" r="0.3" fill="rgba(255,255,255,0.6)" stroke="none" />
-            <circle class="bubble bubble-3" cx="11" cy="10" r="0.5" fill="rgba(255,255,255,0.6)" stroke="none" />
+            
+            <g clip-path="url(#liquid-clip)">
+              <circle class="bubble bubble-1" cx="10" cy="13" r="0.4" fill="rgba(255,255,255,0.6)" stroke="none" />
+              <circle class="bubble bubble-2" cx="14" cy="12" r="0.3" fill="rgba(255,255,255,0.6)" stroke="none" />
+              <circle class="bubble bubble-3" cx="11" cy="10" r="0.5" fill="rgba(255,255,255,0.6)" stroke="none" />
+            </g>
           </g>
           
           <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" stroke="#ffffff" />
@@ -575,7 +575,6 @@
 
     <div class="hint-overlay" id="hint-overlay">
       <div class="hint-content">
-        <button class="hint-close" id="hint-close">✕</button>
         <p>Скоро має вийти фільм із нашою улюбленою акторкою по цьому сюжету</p>
       </div>
     </div>
@@ -594,7 +593,6 @@
     const resetBtn = document.querySelector('.reset-btn');
     const hintBtn = document.getElementById('hint-btn');
     const hintOverlay = document.getElementById('hint-overlay');
-    const hintClose = document.getElementById('hint-close');
 
     function _0x5c2(c) {
       if (!c) return '';
@@ -715,11 +713,6 @@
     hintBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       showHint();
-    });
-
-    hintClose.addEventListener('click', (e) => {
-      e.stopPropagation();
-      hideHint();
     });
 
     hintOverlay.addEventListener('click', () => {
