@@ -1,1 +1,552 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Код Доступу</title>
+  
+  <!-- Montserrat Font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <style>
+    /* Theme Colors & Reset */
+    :root {
+      --color-red: #b80000;
+      --color-dark-blue: #0a1128;
+      --color-black: #000000;
+      --color-white: #ffffff;
+      --color-navy-light: #121c3a;
+      --color-navy-dark: #070d1e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      -webkit-tap-highlight-color: transparent; /* Removes tap flash on mobile */
+      user-select: none; /* Prevents text selection while typing */
+    }
+
+    body {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Core Mobile Adaptive Container */
+    .app-container {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      height: 100dvh;
+      background-color: var(--color-dark-blue);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(16px, 4vh, 32px) 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Game Screen Wrapper */
+    .game-screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .game-screen.hide {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: clamp(1.2rem, 5vw, 1.6rem);
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: clamp(0.75rem, 3vw, 0.85rem);
+      color: #8c9cb8;
+      font-weight: 500;
+    }
+
+    /* Code Inputs adaptive wrapper */
+    .code-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 16px 0;
+      flex-grow: 1;
+    }
+
+    .code-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: clamp(4px, 1.5vw, 10px);
+      width: 100%;
+      max-width: 360px;
+      transition: transform 0.15s ease-in-out;
+    }
+
+    .char-box {
+      aspect-ratio: 1;
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 2px solid var(--color-navy-light);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: clamp(1.2rem, 5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--color-white);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .char-box.active {
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .char-box.filled {
+      border-color: var(--color-red);
+    }
+
+    /* Custom Onscreen Keyboard */
+    .keyboard-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2vh, 8px);
+      flex-shrink: 0;
+    }
+
+    .keyboard-row {
+      display: flex;
+      gap: clamp(6px, 1.2vh, 8px);
+      width: 100%;
+    }
+
+    .key-btn {
+      flex: 1;
+      height: clamp(42px, 6.5vh, 54px);
+      background-color: var(--color-navy-light);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      color: var(--color-white);
+      font-size: clamp(0.9rem, 4vw, 1.2rem);
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.08s ease, background-color 0.08s ease;
+    }
+
+    /* Active touch feedback for responsive physical feel */
+    .key-btn:active {
+      transform: scale(0.95);
+      background-color: var(--color-red);
+    }
+
+    @media (hover: hover) {
+      .key-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    /* Custom Action Buttons styling */
+    .clear-key {
+      flex: 1;
+      background-color: var(--color-black);
+      color: #ff4a4a;
+      font-size: clamp(0.7rem, 3.2vw, 0.9rem);
+      border: 1px solid rgba(255, 74, 74, 0.15);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .clear-key:active {
+      background-color: #210909;
+    }
+
+    .enter-key {
+      flex: 1.5;
+      background-color: var(--color-red);
+      font-size: clamp(0.7rem, 3.2vw, 0.9rem);
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .enter-key:active {
+      background-color: #8c0000;
+    }
+
+    /* Success Screen Area */
+    .success-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-navy-dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.05);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10;
+      padding: 24px;
+    }
+
+    .success-screen.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .success-title {
+      font-size: clamp(1.4rem, 6vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--color-white);
+      margin-top: clamp(20px, 4vh, 28px);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .success-subtitle {
+      font-size: clamp(0.85rem, 3.8vw, 1.05rem);
+      color: #8c9cb8;
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+
+    /* Glowing Wine Glass Setup */
+    .glass-container {
+      position: relative;
+      width: clamp(130px, 30vh, 180px);
+      height: clamp(130px, 30vh, 180px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .glass-glow {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(184, 0, 0, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    .lucide-wine {
+      width: 100%;
+      height: 100%;
+      max-width: 110px;
+      max-height: 110px;
+      z-index: 2;
+      filter: drop-shadow(0 0 8px rgba(184, 0, 0, 0.4));
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(0.9); opacity: 0.5; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    /* Wine Fluid Fill/Empty Animation */
+    .wine-liquid {
+      animation: fill-and-empty 6s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+    }
+
+    @keyframes fill-and-empty {
+      0% { transform: translateY(11px); }   /* Emptied below viewport bounds */
+      40% { transform: translateY(0px); }   /* Filled up to standard pour height (y=5) */
+      60% { transform: translateY(0px); }   /* Hold while full */
+      100% { transform: translateY(11px); } /* Return to empty */
+    }
+
+    /* Glass Bubbles Animation */
+    .bubble {
+      animation: float-bubble 3s infinite linear;
+    }
+    .bubble-1 { animation-delay: 0.8s; animation-duration: 2s; }
+    .bubble-2 { animation-delay: 1.5s; animation-duration: 2.5s; }
+    .bubble-3 { animation-delay: 2.2s; animation-duration: 1.8s; }
+
+    @keyframes float-bubble {
+      0% { transform: translateY(2px); opacity: 0; }
+      30% { opacity: 0.7; }
+      80% { opacity: 0.7; }
+      100% { transform: translateY(-7px); opacity: 0; }
+    }
+
+    /* Incorrect Entry Animation */
+    .shake {
+      animation: shake-action 0.5s ease-in-out;
+    }
+
+    .error-box {
+      border-color: var(--color-red) !important;
+      box-shadow: 0 0 10px rgba(184, 0, 0, 0.4) !important;
+    }
+
+    @keyframes shake-action {
+      0%, 100% { transform: translateX(0); }
+      15%, 45%, 75% { transform: translateX(-8px); }
+      30%, 60%, 90% { transform: translateX(8px); }
+    }
+
+    /* Reset button inside success screen */
+    .reset-btn {
+      margin-top: clamp(24px, 5vh, 40px);
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.5);
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .reset-btn:active {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Game Interface Panel -->
+    <div class="game-screen">
+      <header class="header">
+        <h1>Код Доступу</h1>
+        <p>Введіть 6-значний пароль для входу</p>
+      </header>
+
+      <!-- 6 Uneditable Character Slots -->
+      <div class="code-wrapper">
+        <div class="code-container" id="code-container">
+          <div class="char-box active" id="box-0"></div>
+          <div class="char-box" id="box-1"></div>
+          <div class="char-box" id="box-2"></div>
+          <div class="char-box" id="box-3"></div>
+          <div class="char-box" id="box-4"></div>
+          <div class="char-box" id="box-5"></div>
+        </div>
+      </div>
+
+      <!-- Tactile Custom Onscreen Keyboard -->
+      <div class="keyboard-container">
+        <!-- Row 1 -->
+        <div class="keyboard-row">
+          <button class="key-btn" data-key="А">А</button>
+          <button class="key-btn" data-key="Е">Е</button>
+          <button class="key-btn" data-key="О">О</button>
+          <button class="key-btn" data-key="У">У</button>
+          <button class="key-btn" data-key="И">И</button>
+          <button class="key-btn" data-key="І">І</button>
+        </div>
+        <!-- Row 2 -->
+        <div class="keyboard-row">
+          <button class="key-btn" data-key="Б">Б</button>
+          <button class="key-btn" data-key="В">В</button>
+          <button class="key-btn" data-key="Н">Н</button>
+          <button class="key-btn" data-key="Р">Р</button>
+          <button class="key-btn" data-key="С">С</button>
+          <button class="key-btn" data-key="Т">Т</button>
+        </div>
+        <!-- Row 3 -->
+        <div class="keyboard-row">
+          <button class="key-btn control-key clear-key" data-key="ОЧИСТИТИ" title="Очистити">ОЧИСТИТИ</button>
+          <button class="key-btn control-key enter-key" data-key="ВВЕСТИ">ВВЕСТИ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Screen (Restricted Wine Glass Animation with Updated Message) -->
+    <div class="success-screen">
+      <div class="glass-container">
+        <div class="glass-glow"></div>
+        
+        <!-- Modified Lucide Wine Glass SVG Structure with Animations -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wine">
+          <defs>
+            <!-- Defines bounding area matching Lucide's inner bowl profile -->
+            <clipPath id="bowl-clip">
+              <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" />
+            </clipPath>
+          </defs>
+          
+          <!-- Liquid & Floating Bubbles Group (Masked inside the bowl) -->
+          <g clip-path="url(#bowl-clip)">
+            <rect class="wine-liquid" x="2" y="5" width="20" height="11" fill="#b80000" stroke="none" />
+            <circle class="bubble bubble-1" cx="10" cy="13" r="0.4" fill="rgba(255,255,255,0.6)" stroke="none" />
+            <circle class="bubble bubble-2" cx="14" cy="12" r="0.3" fill="rgba(255,255,255,0.6)" stroke="none" />
+            <circle class="bubble bubble-3" cx="11" cy="10" r="0.5" fill="rgba(255,255,255,0.6)" stroke="none" />
+          </g>
+          
+          <!-- Classic Lucide Outlines Overlayed to Retain Fine Details -->
+          <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" stroke="#ffffff" />
+          <path d="M12 15v7" stroke="#ffffff" />
+          <path d="M8 22h8" stroke="#ffffff" />
+        </svg>
+      </div>
+      <h2 class="success-title">Є ШАМПУСІК))</h2>
+      <p class="success-subtitle">Волію скласти компанію, хоч і безалкогольно 😊</p>
+      <button class="reset-btn">Спробувати знову</button>
+    </div>
+
+  </div>
+
+  <script>
+    const TARGET_PASSWORD = "ВЕРІТІ";
+    let enteredCode = [];
+
+    const boxes = Array.from({ length: 6 }, (_, i) => document.getElementById(`box-${i}`));
+    const codeContainer = document.getElementById('code-container');
+    const gameScreen = document.querySelector('.game-screen');
+    const successScreen = document.querySelector('.success-screen');
+    const resetBtn = document.querySelector('.reset-btn');
+
+    // Display Updater
+    function updateDisplay() {
+      boxes.forEach((box, index) => {
+        if (index < enteredCode.length) {
+          box.textContent = enteredCode[index];
+          box.classList.add('filled');
+          box.classList.remove('active');
+        } else {
+          box.textContent = '';
+          box.classList.remove('filled');
+          if (index === enteredCode.length) {
+            box.classList.add('active');
+          } else {
+            box.classList.remove('active');
+          }
+        }
+      });
+    }
+
+    // Input Handling
+    function handleInput(key) {
+      if (key === 'ОЧИСТИТИ' || key === '✕' || key === 'BACKSPACE') {
+        if (enteredCode.length > 0) {
+          enteredCode.pop();
+          updateDisplay();
+        }
+      } else if (key === 'ВВЕСТИ' || key === 'ENTER') {
+        submitAttempt();
+      } else {
+        if (enteredCode.length < 6) {
+          enteredCode.push(key);
+          updateDisplay();
+        }
+      }
+    }
+
+    // Submit Validation
+    function submitAttempt() {
+      const codeString = enteredCode.join('');
+      
+      if (codeString === TARGET_PASSWORD) {
+        // Unlock screen
+        successScreen.classList.add('show');
+        gameScreen.classList.add('hide');
+      } else {
+        // Handle incorrect input with visual feedback
+        codeContainer.classList.add('shake');
+        boxes.forEach(box => box.classList.add('error-box'));
+        
+        if (navigator.vibrate) {
+          navigator.vibrate(120);
+        }
+
+        setTimeout(() => {
+          codeContainer.classList.remove('shake');
+          boxes.forEach(box => box.classList.remove('error-box'));
+          enteredCode = [];
+          updateDisplay();
+        }, 550);
+      }
+    }
+
+    // Bind Touch/Pointer Events on Onscreen Keyboard
+    document.querySelectorAll('.key-btn').forEach(btn => {
+      // Pointerdown triggers instantly and prevents delay on touch interfaces
+      btn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        const value = btn.getAttribute('data-key');
+        handleInput(value);
+      });
+    });
+
+    // Reset Functionality
+    resetBtn.addEventListener('click', () => {
+      successScreen.classList.remove('show');
+      gameScreen.classList.remove('hide');
+      enteredCode = [];
+      updateDisplay();
+    });
+
+    // Support Desktop Physical Keyboards
+    document.addEventListener('keydown', (e) => {
+      const key = e.key.toUpperCase();
+      if (key === 'BACKSPACE' || key === 'DELETE') {
+        handleInput('ОЧИСТИТИ');
+      } else if (key === 'ENTER') {
+        handleInput('ВВЕСТИ');
+      } else {
+        const acceptableKeys = ['А', 'Е', 'О', 'У', 'И', 'І', 'Б', 'В', 'Н', 'Р', 'С', 'Т'];
+        if (acceptableKeys.includes(key)) {
+          handleInput(key);
+        }
+      }
+    });
+
+    // Initial setup
+    updateDisplay();
+  </script>
+</body>
+</html>
