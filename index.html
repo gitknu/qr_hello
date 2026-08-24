@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Інфо-простір</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --color-white: #ffffff;
@@ -14,6 +16,7 @@
       --color-pink: #ff8da1;
       --color-soft-blue: #e8f1f5;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -22,6 +25,7 @@
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
+
     body {
       background-color: #f3f5f8;
       color: var(--color-black);
@@ -32,6 +36,7 @@
       align-items: center;
       overflow: hidden;
     }
+
     .app-container {
       width: 100%;
       max-width: 420px;
@@ -41,12 +46,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(20px, 4vh, 36px) 24px;
+      padding: clamp(12px, 3vh, 28px) 24px;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.05);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
     }
+
     .game-screen {
       width: 100%;
       height: 100%;
@@ -55,16 +61,19 @@
       justify-content: space-between;
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
+
     .game-screen.hide {
       opacity: 0;
       transform: scale(0.95);
       pointer-events: none;
     }
+
     .header {
       text-align: center;
       margin-top: 5px;
       flex-shrink: 0;
     }
+
     .header h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.4rem, 6vw, 1.9rem);
@@ -76,11 +85,13 @@
       justify-content: center;
       gap: 10px;
     }
+
     .header-icon {
       color: var(--color-pink);
       width: clamp(18px, 4.5vw, 24px);
       height: clamp(18px, 4.5vw, 24px);
     }
+
     .header p {
       font-size: clamp(0.7rem, 2.8vw, 0.8rem);
       color: rgba(0, 0, 0, 0.4);
@@ -88,14 +99,16 @@
       letter-spacing: 2px;
       text-transform: uppercase;
     }
+
     .code-wrapper {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin: 15px 0;
+      margin: 10px 0;
       flex-grow: 1;
     }
+
     .code-container {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -104,6 +117,7 @@
       max-width: 360px;
       margin: 0 auto;
     }
+
     .char-box {
       position: relative;
       aspect-ratio: 1 / 1;
@@ -118,15 +132,18 @@
       overflow: hidden;
       box-sizing: border-box;
     }
+
     .char-box.active {
       border-color: var(--color-black);
       background-color: var(--color-white);
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.04);
     }
+
     .char-box.filled {
       border-color: var(--color-pink);
       background-color: rgba(255, 141, 161, 0.06);
     }
+
     .char-text {
       position: absolute;
       top: 50%;
@@ -137,7 +154,13 @@
       color: var(--color-black);
       line-height: 1;
       pointer-events: none;
+      transition: opacity 0.4s ease-in-out;
     }
+
+    .char-text.ghost-letter {
+      opacity: 0.35 !important;
+    }
+
     .hint-btn {
       background-color: transparent;
       border: 1.5px solid var(--color-pink);
@@ -149,8 +172,8 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.2s ease;
-      margin-top: clamp(20px, 4vh, 32px);
+      transition: all 0.2s ease, opacity 0.6s ease-in-out;
+      margin-top: clamp(14px, 3vh, 24px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -159,10 +182,23 @@
       width: auto;
       max-width: 90%;
     }
+
     .hint-btn:active {
       background-color: rgba(255, 141, 161, 0.08);
       transform: scale(0.97);
     }
+
+    #second-hint-btn {
+      display: none;
+      opacity: 0;
+      margin-top: clamp(8px, 1.5vh, 12px);
+    }
+
+    #second-hint-btn.show-btn {
+      display: flex;
+      opacity: 1;
+    }
+
     .inline-icon {
       width: 1.25em;
       height: 1.25em;
@@ -171,6 +207,7 @@
       vertical-align: middle;
       flex-shrink: 0;
     }
+
     .keyboard-container {
       width: 100%;
       display: flex;
@@ -178,11 +215,13 @@
       gap: clamp(8px, 1.5vh, 10px);
       flex-shrink: 0;
     }
+
     .keyboard-row {
       display: flex;
       gap: clamp(8px, 1.5vh, 10px);
       width: 100%;
     }
+
     .key-btn {
       flex: 1;
       height: clamp(44px, 6.5vh, 54px);
@@ -196,24 +235,34 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      transition: transform 0.08s ease, background-color 0.08s ease;
+      transition: transform 0.08s ease, background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
     }
+
     .key-btn:active {
       transform: scale(0.95);
       background-color: var(--color-pink);
       color: var(--color-white);
     }
+
+    .key-btn.key-highlight {
+      background-color: var(--color-pink) !important;
+      border-color: var(--color-pink) !important;
+      color: var(--color-white) !important;
+    }
+
     @media (hover: hover) {
       .key-btn:hover {
         background-color: rgba(0, 0, 0, 0.04);
       }
     }
+
     .control-key {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
+
     .clear-key {
       flex: 1;
       background-color: var(--color-white);
@@ -224,9 +273,11 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
+
     .clear-key:active {
       background-color: rgba(0, 0, 0, 0.05);
     }
+
     .enter-key {
       flex: 1.5;
       background-color: var(--color-pink);
@@ -238,10 +289,12 @@
       border: 1.5px solid var(--color-pink);
       color: var(--color-white);
     }
+
     .enter-key:active {
       background-color: #e57589;
       border-color: #e57589;
     }
+
     .success-screen {
       position: absolute;
       top: 0;
@@ -260,11 +313,13 @@
       z-index: 10;
       padding: 24px;
     }
+
     .success-screen.show {
       opacity: 1;
       pointer-events: auto;
       transform: scale(1);
     }
+
     .success-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.6rem, 7vw, 2.2rem);
@@ -273,6 +328,7 @@
       margin-top: clamp(24px, 5vh, 32px);
       text-align: center;
     }
+
     .success-subtitle {
       font-size: clamp(0.85rem, 3.8vw, 1.05rem);
       color: rgba(0, 0, 0, 0.6);
@@ -281,6 +337,7 @@
       line-height: 1.6;
       max-width: 85%;
     }
+
     .glass-container {
       position: relative;
       width: clamp(130px, 30vh, 180px);
@@ -289,6 +346,7 @@
       justify-content: center;
       align-items: center;
     }
+
     .glass-glow {
       position: absolute;
       width: 80%;
@@ -297,6 +355,7 @@
       border-radius: 50%;
       animation: pulse-glow 3s ease-in-out infinite;
     }
+
     .lucide-wine {
       width: 100%;
       height: 100%;
@@ -305,47 +364,56 @@
       z-index: 2;
       filter: drop-shadow(0 0 8px rgba(255, 141, 161, 0.25));
     }
+
     @keyframes pulse-glow {
       0%, 100% { transform: scale(0.9); opacity: 0.5; }
       50% { transform: scale(1.15); opacity: 1; }
     }
+
     .wine-liquid {
       animation: fill-and-empty 6s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
     }
+
     @keyframes fill-and-empty {
       0% { transform: translateY(11px); }
       40% { transform: translateY(0px); }
       60% { transform: translateY(0px); }
       100% { transform: translateY(11px); }
     }
+
     .bubble {
       animation: float-bubble 3s infinite linear;
     }
     .bubble-1 { animation-delay: 0.8s; animation-duration: 2s; }
     .bubble-2 { animation-delay: 1.5s; animation-duration: 2.5s; }
     .bubble-3 { animation-delay: 2.2s; animation-duration: 1.8s; }
+
     @keyframes float-bubble {
       0% { transform: translateY(2px); opacity: 0; }
       30% { opacity: 0.7; }
       80% { opacity: 0.7; }
       100% { transform: translateY(-7px); opacity: 0; }
     }
+
     .shake {
       animation: shake-action 0.5s ease-in-out;
     }
+
     .error-box {
       border-color: var(--color-red) !important;
       box-shadow: 0 0 12px rgba(184, 0, 0, 0.2) !important;
     }
+
     @keyframes shake-action {
       0%, 100% { transform: translateX(0); }
       15%, 45%, 75% { transform: translateX(-8px); }
       30%, 60%, 90% { transform: translateX(8px); }
     }
+
     .reset-btn {
       margin-top: clamp(24px, 5vh, 40px);
       background-color: transparent;
-      border: 1.5px solid var(--color-pink);
+      border: 1px solid var(--color-pink);
       color: var(--color-pink);
       padding: 10px 24px;
       border-radius: 30px;
@@ -356,10 +424,12 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
+
     .reset-btn:active {
       background-color: rgba(255, 141, 161, 0.08);
       color: var(--color-pink);
     }
+
     .hint-overlay {
       position: fixed;
       top: 0;
@@ -377,10 +447,12 @@
       z-index: 100;
       padding: 24px;
     }
+
     .hint-overlay.show {
       opacity: 1;
       pointer-events: auto;
     }
+
     .hint-content {
       background-color: var(--color-white);
       border: 1.5px solid var(--color-pink);
@@ -394,9 +466,11 @@
       transform: translateY(20px);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .hint-overlay.show .hint-content {
       transform: translateY(0);
     }
+
     .hint-content p {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.15rem, 4.8vw, 1.4rem);
@@ -408,7 +482,9 @@
   </style>
 </head>
 <body>
+
   <div class="app-container">
+    
     <div class="game-screen">
       <header class="header">
         <h1>
@@ -418,8 +494,9 @@
           </svg>
           КОД ДОСТУПУ
         </h1>
-        <p>Введи 6-значний пароль для входу</p>
+        <p>Введіть 6-значний пароль для входу</p>
       </header>
+
       <div class="code-wrapper">
         <div class="code-container" id="code-container">
           <div class="char-box active" id="box-0"><span class="char-text"></span></div>
@@ -437,7 +514,16 @@
           </svg>
           ПІДКАЗКА
         </button>
+        <button class="hint-btn" id="second-hint-btn">
+          <svg class="lucide lucide-sparkles inline-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+            <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5Z"/>
+            <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z"/>
+          </svg>
+          ЩЕ ПІДКАЗКА
+        </button>
       </div>
+
       <div class="keyboard-container">
         <div class="keyboard-row">
           <button class="key-btn" data-key="А">А</button>
@@ -474,9 +560,11 @@
         </div>
       </div>
     </div>
+
     <div class="success-screen">
       <div class="glass-container">
         <div class="glass-glow"></div>
+        
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wine">
           <defs>
             <clipPath id="bowl-clip">
@@ -486,14 +574,17 @@
               <rect class="wine-liquid" x="2" y="5" width="20" height="11" />
             </clipPath>
           </defs>
+          
           <g clip-path="url(#bowl-clip)">
             <rect class="wine-liquid" x="2" y="5" width="20" height="11" fill="#ff8da1" stroke="none" />
+            
             <g clip-path="url(#liquid-clip)">
               <circle class="bubble bubble-1" cx="10" cy="13" r="0.4" fill="rgba(255,255,255,0.8)" stroke="none" />
               <circle class="bubble bubble-2" cx="14" cy="12" r="0.3" fill="rgba(255,255,255,0.8)" stroke="none" />
               <circle class="bubble bubble-3" cx="11" cy="10" r="0.5" fill="rgba(255,255,255,0.8)" stroke="none" />
             </g>
           </g>
+          
           <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" stroke="#000000" />
           <path d="M12 15v7" stroke="#000000" />
           <path d="M8 22h8" stroke="#000000" />
@@ -503,15 +594,21 @@
       <p class="success-subtitle">Волію скласти компанію, хоч і безалкогольно 😊</p>
       <button class="reset-btn">Спробувати знову</button>
     </div>
+
     <div class="hint-overlay" id="hint-overlay">
       <div class="hint-content">
         <p>Скоро має вийти фільм із нашою улюбленою акторкою по цьому сюжету</p>
       </div>
     </div>
+
   </div>
+
   <script>
     let enteredCode = [];
     let hintTimeout;
+    let stuckTimeout;
+    let isGhostAnimating = false;
+
     const boxes = Array.from({ length: 6 }, (_, i) => document.querySelector(`#box-${i} .char-text`));
     const containers = Array.from({ length: 6 }, (_, i) => document.getElementById(`box-${i}`));
     const codeContainer = document.getElementById('code-container');
@@ -519,10 +616,13 @@
     const successScreen = document.querySelector('.success-screen');
     const resetBtn = document.querySelector('.reset-btn');
     const hintBtn = document.getElementById('hint-btn');
+    const secondHintBtn = document.getElementById('second-hint-btn');
     const hintOverlay = document.getElementById('hint-overlay');
+
     function _0x5c2(c) {
       if (!c) return '';
       let u = c.toString().toUpperCase();
+      
       const homoglyphs = {
         'A': 'А',
         'B': 'В',
@@ -538,11 +638,14 @@
         'X': 'Х',
         'Y': 'У'
       };
+      
       if (u === 'І' || u === 'I' || u === 'і' || u === 'i') {
         return 'І';
       }
+      
       return homoglyphs[u] || u;
     }
+
     function _0x3b1a(s) {
       if (s.length !== 6) return false;
       const target = [1042, 1045, 1056, 1030, 1058, 1030];
@@ -553,6 +656,7 @@
       }
       return true;
     }
+
     function updateDisplay() {
       boxes.forEach((box, index) => {
         const container = containers[index];
@@ -571,7 +675,10 @@
         }
       });
     }
+
     function handleInput(key) {
+      if (isGhostAnimating) return;
+
       const normalized = _0x5c2(key);
       if (normalized === 'ОЧИСТИТИ' || normalized === '✕' || normalized === 'BACKSPACE') {
         if (enteredCode.length > 0) {
@@ -587,17 +694,22 @@
         }
       }
     }
+
     function submitAttempt() {
       const codeString = enteredCode.join('');
+      
       if (_0x3b1a(codeString)) {
+        clearTimeout(stuckTimeout);
         successScreen.classList.add('show');
         gameScreen.classList.add('hide');
       } else {
         codeContainer.classList.add('shake');
         containers.forEach(container => container.classList.add('error-box'));
+        
         if (navigator.vibrate) {
           navigator.vibrate(120);
         }
+
         setTimeout(() => {
           codeContainer.classList.remove('shake');
           containers.forEach(container => container.classList.remove('error-box'));
@@ -606,15 +718,69 @@
         }, 550);
       }
     }
+
     function showHint() {
       hintOverlay.classList.add('show');
       clearTimeout(hintTimeout);
       hintTimeout = setTimeout(hideHint, 5000);
     }
+
     function hideHint() {
       hintOverlay.classList.remove('show');
       clearTimeout(hintTimeout);
     }
+
+    function runSequentialGhostHints() {
+      if (isGhostAnimating) return;
+      isGhostAnimating = true;
+
+      const keyB = document.querySelector('.key-btn[data-key="В"]');
+      const keyI = document.querySelector('.key-btn[data-key="І"]');
+
+      const original0 = boxes[0].textContent;
+      const original0Filled = containers[0].classList.contains('filled');
+      const original5 = boxes[5].textContent;
+      const original5Filled = containers[5].classList.contains('filled');
+
+      boxes[0].textContent = 'В';
+      boxes[0].classList.add('ghost-letter');
+      containers[0].classList.add('filled');
+      if (keyB) keyB.classList.add('key-highlight');
+
+      setTimeout(() => {
+        boxes[0].textContent = original0;
+        boxes[0].classList.remove('ghost-letter');
+        if (!original0Filled) containers[0].classList.remove('filled');
+        if (keyB) keyB.classList.remove('key-highlight');
+
+        setTimeout(() => {
+          boxes[5].textContent = 'І';
+          boxes[5].classList.add('ghost-letter');
+          containers[5].classList.add('filled');
+          if (keyI) keyI.classList.add('key-highlight');
+
+          setTimeout(() => {
+            boxes[5].textContent = original5;
+            boxes[5].classList.remove('ghost-letter');
+            if (!original5Filled) containers[5].classList.remove('filled');
+            if (keyI) keyI.classList.remove('key-highlight');
+
+            isGhostAnimating = false;
+          }, 1800);
+
+        }, 400);
+
+      }, 1800);
+    }
+
+    function startTimer() {
+      clearTimeout(stuckTimeout);
+      secondHintBtn.classList.remove('show-btn');
+      stuckTimeout = setTimeout(() => {
+        secondHintBtn.classList.add('show-btn');
+      }, 20000);
+    }
+
     document.querySelectorAll('.key-btn').forEach(btn => {
       btn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
@@ -622,20 +788,31 @@
         handleInput(value);
       });
     });
+
     hintBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       showHint();
     });
+
+    secondHintBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      runSequentialGhostHints();
+    });
+
     hintOverlay.addEventListener('click', () => {
       hideHint();
     });
+
     resetBtn.addEventListener('click', () => {
       successScreen.classList.remove('show');
       gameScreen.classList.remove('hide');
       enteredCode = [];
       updateDisplay();
+      startTimer();
     });
+
     document.addEventListener('keydown', (e) => {
+      if (isGhostAnimating) return;
       const key = e.key.toUpperCase();
       const normalizedKey = _0x5c2(key);
       if (normalizedKey === 'BACKSPACE' || normalizedKey === 'DELETE') {
@@ -649,7 +826,9 @@
         }
       }
     });
+
     updateDisplay();
+    startTimer();
   </script>
 </body>
 </html>
