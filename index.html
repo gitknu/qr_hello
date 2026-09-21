@@ -11,8 +11,8 @@
     :root {
       --color-white: #ffffff;
       --color-black: #000000;
-      --color-yellow: #e69d24;
-      --color-pink: #e69d24;
+      --color-soft-orange: #ffa46e;
+      --color-pink: var(--color-soft-orange);
       --color-soft-blue: #e8f1f5;
     }
     * {
@@ -78,7 +78,7 @@
       gap: 10px;
     }
     .header-icon {
-      color: var(--color-yellow);
+      color: var(--color-soft-orange);
       width: clamp(18px, 4.5vw, 24px);
       height: clamp(18px, 4.5vw, 24px);
     }
@@ -125,8 +125,8 @@
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.04);
     }
     .char-box.filled {
-      border-color: var(--color-yellow);
-      background-color: rgba(230, 157, 36, 0.08);
+      border-color: var(--color-soft-orange);
+      background-color: rgba(255, 164, 110, 0.1);
     }
     .char-text {
       position: absolute;
@@ -145,8 +145,8 @@
     }
     .hint-btn {
       background-color: transparent;
-      border: 1.5px solid var(--color-yellow);
-      color: var(--color-yellow);
+      border: 1.5px solid var(--color-soft-orange);
+      color: var(--color-soft-orange);
       padding: clamp(12px, 2vh, 16px) clamp(32px, 8vw, 48px);
       border-radius: 30px;
       font-size: clamp(0.75rem, 3.2vw, 0.85rem);
@@ -165,7 +165,7 @@
       max-width: 90%;
     }
     .hint-btn:active {
-      background-color: rgba(230, 157, 36, 0.1);
+      background-color: rgba(255, 164, 110, 0.12);
       transform: scale(0.97);
     }
     #second-hint-btn {
@@ -214,12 +214,12 @@
     }
     .key-btn:active {
       transform: scale(0.95);
-      background-color: var(--color-yellow);
+      background-color: var(--color-soft-orange);
       color: var(--color-white);
     }
     .key-btn.key-highlight {
-      background-color: var(--color-yellow) !important;
-      border-color: var(--color-yellow) !important;
+      background-color: var(--color-soft-orange) !important;
+      border-color: var(--color-soft-orange) !important;
       color: var(--color-white) !important;
     }
     @media (hover: hover) {
@@ -248,18 +248,18 @@
     }
     .enter-key {
       flex: 1.5;
-      background-color: var(--color-yellow);
+      background-color: var(--color-soft-orange);
       font-size: clamp(0.7rem, 3.2vw, 0.85rem);
       font-weight: 700;
       letter-spacing: 1.5px;
       white-space: nowrap;
       text-transform: uppercase;
-      border: 1.5px solid var(--color-yellow);
+      border: 1.5px solid var(--color-soft-orange);
       color: var(--color-white);
     }
     .enter-key:active {
-      background-color: #cf8515;
-      border-color: #cf8515;
+      background-color: #f08e54;
+      border-color: #f08e54;
     }
     .success-screen {
       position: absolute;
@@ -312,7 +312,7 @@
       position: absolute;
       width: 80%;
       height: 80%;
-      background: radial-gradient(circle, rgba(230, 157, 36, 0.35) 0%, rgba(230, 157, 36, 0.12) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 164, 110, 0.3) 0%, rgba(255, 164, 110, 0.1) 45%, transparent 70%);
       border-radius: 50%;
       animation: pulse-glow 3s ease-in-out infinite;
     }
@@ -335,8 +335,8 @@
     .reset-btn {
       margin-top: clamp(24px, 5vh, 40px);
       background-color: transparent;
-      border: 1px solid var(--color-yellow);
-      color: var(--color-yellow);
+      border: 1px solid var(--color-soft-orange);
+      color: var(--color-soft-orange);
       padding: 10px 24px;
       border-radius: 30px;
       font-size: 0.8rem;
@@ -347,8 +347,8 @@
       transition: all 0.2s ease;
     }
     .reset-btn:active {
-      background-color: rgba(230, 157, 36, 0.1);
-      color: var(--color-yellow);
+      background-color: rgba(255, 164, 110, 0.12);
+      color: var(--color-soft-orange);
     }
     .hint-overlay {
       position: fixed;
@@ -373,7 +373,7 @@
     }
     .hint-content {
       background-color: var(--color-white);
-      border: 1.5px solid var(--color-yellow);
+      border: 1.5px solid var(--color-soft-orange);
       border-radius: 24px;
       padding: clamp(36px, 6vh, 52px) clamp(24px, 5vw, 40px);
       width: 100%;
@@ -399,7 +399,7 @@
     .leaf-falling {
       position: absolute;
       z-index: 4;
-      filter: drop-shadow(0 0 6px rgba(230, 157, 36, 0.45));
+      filter: drop-shadow(0 0 6px rgba(255, 164, 110, 0.45));
       opacity: 0;
       pointer-events: none;
     }
@@ -522,7 +522,7 @@
       z-index: 3;
       opacity: 0;
     }
-    /* Rain hitting umbrella dome and vanishing */
+    /* Rain hitting umbrella silhouette dome and vanishing */
     .rain-hit-1 {
       left: 50%;
       top: -8px;
@@ -600,15 +600,15 @@
       }
       80% {
         opacity: 0.85;
-        transform: translateY(40px) scaleY(1);
+        transform: translateY(38px) scaleY(1);
       }
       92% {
         opacity: 0.85;
-        transform: translateY(48px) scale(1.6, 0.35);
+        transform: translateY(44px) scale(1.6, 0.35);
       }
       100% {
         opacity: 0;
-        transform: translateY(49px) scale(2.2, 0.1);
+        transform: translateY(45px) scale(2.2, 0.1);
       }
     }
     @keyframes rain-hit-mid-high {
@@ -621,15 +621,15 @@
       }
       80% {
         opacity: 0.85;
-        transform: translateY(45px) scaleY(1);
+        transform: translateY(44px) scaleY(1);
       }
       92% {
         opacity: 0.85;
-        transform: translateY(53px) scale(1.6, 0.35);
+        transform: translateY(51px) scale(1.6, 0.35);
       }
       100% {
         opacity: 0;
-        transform: translateY(54px) scale(2.2, 0.1);
+        transform: translateY(52px) scale(2.2, 0.1);
       }
     }
     @keyframes rain-hit-mid {
@@ -642,15 +642,15 @@
       }
       80% {
         opacity: 0.85;
-        transform: translateY(55px) scaleY(1);
+        transform: translateY(53px) scaleY(1);
       }
       92% {
         opacity: 0.85;
-        transform: translateY(65px) scale(1.6, 0.35);
+        transform: translateY(61px) scale(1.6, 0.35);
       }
       100% {
         opacity: 0;
-        transform: translateY(66px) scale(2.2, 0.1);
+        transform: translateY(62px) scale(2.2, 0.1);
       }
     }
     @keyframes rain-hit-low {
@@ -663,15 +663,15 @@
       }
       80% {
         opacity: 0.85;
-        transform: translateY(65px) scaleY(1);
+        transform: translateY(63px) scaleY(1);
       }
       92% {
         opacity: 0.85;
-        transform: translateY(75px) scale(1.6, 0.35);
+        transform: translateY(72px) scale(1.6, 0.35);
       }
       100% {
         opacity: 0;
-        transform: translateY(76px) scale(2.2, 0.1);
+        transform: translateY(73px) scale(2.2, 0.1);
       }
     }
     @keyframes rain-fall-surround {
@@ -783,42 +783,42 @@
           <div class="raindrop rain-surround-2"></div>
           <div class="raindrop rain-surround-3"></div>
           <div class="raindrop rain-surround-4"></div>
-          <!-- Umbrella Icon (Solid black fabric umbrella that shelters from rain) -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-umbrella" style="width: 100%; height: 100%; max-width: 100px; max-height: 100px; z-index: 2; color: var(--color-black); filter: drop-shadow(0 0 8px rgba(230, 157, 36, 0.3));">
-            <path d="M22 12a10.06 10.06 0 0 0-20 0Z" fill="currentColor"/>
-            <path d="M12 12v8a2 2 0 0 0 4 0"/>
-            <path d="M12 2v1"/>
+          <!-- Umbrella Icon (Pure Line Silhouette, fill: none) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-umbrella" style="width: 100%; height: 100%; max-width: 100px; max-height: 100px; z-index: 2; color: var(--color-black); filter: drop-shadow(0 0 8px rgba(255, 164, 110, 0.3));">
+            <path d="M22 12a10.06 10.06 0 0 0-20 0Z" />
+            <path d="M12 12v8a2 2 0 0 0 4 0" />
+            <path d="M12 2v1" />
           </svg>
           <!-- Leaf 1 -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-soft-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-1">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
           </svg>
           <!-- Leaf 2 -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-soft-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-2">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
           </svg>
           <!-- Leaf 3 -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-soft-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-3">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
           </svg>
           <!-- Leaf 4 -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-soft-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf leaf-falling leaf-4">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
           </svg>
         </div>
       </div>
       <h2 class="success-title">T G I F!</h2>
-      <p class="success-subtitle">Волію скласти компанію<br>наприкінці тижня!<br>Потеревенити! 😊</p>
+      <p class="success-subtitle">Волію скласти компанію<br>наприкінці тижня!<br>Потеревенити 😊</p>
       <button class="reset-btn">Спробувати знову</button>
     </div>
     <div class="hint-overlay" id="hint-overlay">
       <div class="hint-content">
         <p>Там про війну і важко ((<br>Але прочитати варто<br>Однозначно
-          <svg class="lucide lucide-bird inline-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-yellow); margin-left: 4px; vertical-align: middle;">
+          <svg class="lucide lucide-bird inline-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-soft-orange); margin-left: 4px; vertical-align: middle;">
             <path d="M16 7h.01"/>
             <path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/>
             <path d="m20 7 2 .5-2 .5"/>
